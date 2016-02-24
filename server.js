@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 var path = require("path");
+var useragent = require('express-useragent');
 
+app.use(useragent.express());
 
 app.get("/", function(req, res) {
     
@@ -21,12 +23,11 @@ app.get("/", function(req, res) {
     responseObj.language = userLang[0];
     
     /*********************** SOFTWARE ***********************/
-    var userSoft = null;
-    
+    var userSoft = req.useragent.platform + "; " + req.useragent.os;
     
     responseObj.software = userSoft;
     
-    res.send(responseObj);
+    res.send(JSON.stringify(responseObj));
 });
 
 var port = process.env.PORT || 8080;
