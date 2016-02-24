@@ -13,14 +13,12 @@ app.get("/", function(req, res) {
      req.connection.remoteAddress || 
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress;
-    
     responseObj.ipaddress = userIp;
     
     /*********************** LANGUAGE ***********************/
-    var userLang = null;
-    
-    
-    responseObj.language = userLang;
+    /*var language = window.navigator.userLanguage || window.navigator.language*/ /*Client side example*/
+    var userLang = req.acceptedLanguages;
+    responseObj.language = userLang[0];
     
     /*********************** SOFTWARE ***********************/
     var userSoft = null;
